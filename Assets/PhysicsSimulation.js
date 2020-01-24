@@ -49,6 +49,21 @@ function onMouseUp(event) {
         start_sim();
     }
 
+function onMouseMove_touch(event) {
+        handle.x = event.touches[0].clientX - ctx.canvas.offsetLeft - offset.x;
+        handle.y = event.touches[0].clientY - ctx.canvas.offsetTop - offset.y;
+        draw();
+    }
+
+function onMouseUp_touch(event) {
+        handle.x = canvaswidth * scale/3 - boxlength * scale/2;
+        document.body.removeEventListener("touchmove", onMouseMove_touch);
+        document.body.removeEventListener("touchend", onMouseUp_touch);
+        x_1 = handle.y / scale- (canvasheight/2 - boxlength/2);
+        mouseisdown = false;
+        start_sim();
+    }
+
 //draws pause icon on top of video
 /*
 function drawPayIcon(){
