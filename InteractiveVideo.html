@@ -77,6 +77,16 @@ document.querySelector(".mute").addEventListener("click",videoMute) //if clicked
             offset.y = event.clientY - ctx.canvas.offsetTop - handle.y; 
         }
     });
+    
+        canvas.addEventListener("touchstart", function(event) { //if mousedown then play do below
+        if(utils.pointInRect(event.touches[0].clientX - ctx.canvas.offsetLeft, event.touches[0].clientY - ctx.canvas.offsetTop, handle)) { 
+            mouseisdown = true;
+            document.body.addEventListener("touchmove", onMouseMove_touch);
+            document.body.addEventListener("touchend", onMouseUp_touch);
+            offset.x = event.touches[0].clientX - ctx.canvas.offsetLeft - handle.x;
+            offset.y = event.touches[0].clientY - ctx.canvas.offsetTop - handle.y; 
+        }
+    });
 
 function readyToPlayVideo(event){ // this is a referance to the video
     // the video may not match the canvas size so find a scale to fit
